@@ -12,6 +12,7 @@ The framework consists of several components:
 * **Mapify**: eases the implementation of 3rd geomap libraries (OpenLayers) by providing a simplified façade, and allows easy integration of GeoRSS feeds with custom icons.
 * **Menufy**: creates a dynamic menu from a simple list and automatically moves the current selected menu item on the top of the list. Can be combined with ActiveElement to automatically update itself when the user scrolls the browser.
 * **PlayerToolbar**: creates a 100% reusable HTML toolbar to manage a video player actions and events created via 3rd party libraries (LongTailVideo).
+* **Scrollbars**: creates non-obstrusive scrollbars that work just anywhere (Firefox included) and don't break your existing CSS.
 * **SlidingMenu**: updates the 2nd level navigation menu according to the current section, in combination with ActiveElement, optionally using animations to show the menu.
 
 ### Requirements
@@ -426,6 +427,51 @@ $("#video-player").playertools(
 });
 ```
 
+#### Scrollbars
+
+Create horizontal scrollbars on any element:
+
+```javascript
+  $('#container').scrollbars();
+```
+
+The look of the scrollbars is 100% customizable using few lines of stylesheets (Firefox included):
+
+```css
+::-webkit-scrollbar {
+  width:0;
+  height:0;
+}
+
+.container {
+  position:relative;
+  overflow:auto; // this must be 'hidden' for non-touch based devices; 'auto' for touch-based devices.
+}
+
+.scrollbar {
+  position:absolute; // required
+
+  left:0px; // required
+  bottom:0px; // required
+
+  background-image: url('img/scrollbar-1px.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  background-size: 100% 4px;
+  height: 14px;
+  margin-bottom: 4px;      
+}
+
+.scrollbar .scroller {
+    position:relative; // required
+
+    width:110px;
+    height:14px;
+    
+    background-image: url('img/scroller-regular.png');
+}
+```
+
 #### SlidingMenu
 
 Creates a sliding menu on the ```#container``` element with specified menu items selector ```#container .item``` and optionally set the minimum width of the menu:
@@ -461,9 +507,13 @@ Users should be able to choose the strategy used by ActiveElement to determine t
 
 ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
 
+#### Scrollbars
+
+Support vertical scrolling as well.
+
 #### jQuery best-practices
 
-Reorganize the code of ActiveElement, PlayerToolbar and SlidingMenu to follow the jQuery best practices in plug-in development.
+Reorganize the code of ActiveElement, PlayerToolbar, Scrollbars and SlidingMenu to follow the jQuery best practices in plug-in development.
 
 #### ActiveElement support
 
