@@ -388,6 +388,44 @@ $('#sections').on('activify.newActiveElement', function(event, active) {
 
 #### PlayerToolbar
 
+Creates an HTML toolbar for the video player embedded on the Web page that will take care of these functions:
+
+* start/stop,
+* progress,
+* volume mute and intensity,
+* screen size (normal, larger, full-screen),
+* quality (SQ, HQ and HD),
+* sharing.
+
+These are the parameters:
+
+* **player**: the player instance must be passed as first parameter,
+* **screens**: the size (```{width: xxx, height: xxx}```) of the screens:
+  * **normal** screen size (default ```normal: { width:640, height:380 }```),
+  * **larger** screen size (default ```larger: { width:960, height:470 }```).
+* **urls**: an array of URLs for the standard quality, high quality and high definition streams.
+
+```javascript
+$("#video-player").playertools(
+  jwplayer('video-player'),{
+    screens: {
+	  normal: {
+	    width:640,
+        height:380
+      },
+	  larger: {
+        width:960,
+        height:470
+      }
+	},
+	urls: {
+	'hd':'http://server/points/to/the/file/at/high/definition.mp4',
+	'hq':'http://server/points/to/the/file/at/high/quality.mp4',
+	'sq':'http://server/points/to/the/file/at/standard/quality.mp4'
+  }
+});
+```
+
 #### SlidingMenu
 
 ### RoadMap
@@ -403,6 +441,12 @@ Users should be able to choose the strategy used by ActiveElement to determine t
 ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
 
 #### ArrowScroller
+
+##### jQuery best-practices
+
+Reorganize the code to follow the jQuery best practices in plug-in development.
+
+#### PlayerToolbar
 
 ##### jQuery best-practices
 
