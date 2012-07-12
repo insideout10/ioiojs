@@ -103,7 +103,7 @@ after:
 To set-up ArrowScroller, call the ```arrowscrollers``` method on any container element (```#container``` in our example), by passing the **arrow.width** parameter with the width of the arrows:
 
 ```javascript
-("#container").arrowscrollers({
+('#container').arrowscrollers({
    settings: {
      arrow: {
        width:36
@@ -167,6 +167,64 @@ $(".section").fillify({
 ```
 
 #### Mapify
+
+```javascript
+$('#container').mapify({
+		elementId: 'map',
+		openLayersURL: 'http://dev.openlayers.org/releases/OpenLayers-2.11/OpenLayers.js',		cache: true,
+		zoom: 5,
+		title: 'World Map',
+		location: {latitude:41.91613, longitude:12.503052}
+	})
+	.on('mapify.create', function (event) {
+		var that = this;
+		$.each( geoRSS, function (key, value) {
+			debug.log(key, value)
+			$(that).mapify( 'geoRSS', {
+				url: 'wp-admin/admin-ajax.php?action=weeotv.geo_rss&categories=' + value,
+				title: key,
+				className: {tag: 'category', attribute: 'term'},
+				externalGraphic: {url: 'wp-content/uploads/img/marker_' + value + '.png', width: 9, height: 17, select: { width: 14, height: 26 } }
+			});
+		});
+	});
+```
+
+##### Events
+
+```javascript
+$('#container').on('mapify.georss', function (event, layer) {
+		
+		// once the georss has been loaded,
+		// add the popupcontrol on the layer.
+		$(this).mapify('popupControl', {
+			layer: layer,
+			size: {width: 210, height: 250},
+			content: '<div class='background'></div><div class='content {className}' onClick='eventDispatcher.viewUrl(\'{link}\');'><div class='title'>{title}</div><div class='thumbnail'><img src='{thumbnail}' /></div></div>'
+		});
+
+	})
+	.on('mapify.loadStart', function (event) {
+		loads = $('#map-status').data('loads') || 0;
+
+		$('#map-status .message')
+			.html('Loading (' + ++loads + ')...');
+		$('#map-status').show();
+
+		$('#map-status').data({loads: loads});
+	})
+	.on('mapify.loadEnd', function (event) {
+		loads = $('#map-status').data('loads') || 1;
+
+		$('#map-status .message')
+			.html('Caricamento in corso (' + --loads + ')...');
+
+		if (0 === loads)
+			$('#map-status').hide();
+
+		$('#map-status').data({loads: loads});
+	});
+```
 
 #### Menufy
 
