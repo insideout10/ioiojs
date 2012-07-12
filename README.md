@@ -16,7 +16,7 @@ The framework consists of several components:
 
 ActiveElement listens for *scroll events* in the browser window.
 
-```
+```javascript
 $('#sections').activeElement({
   selector: '.section',
   tolerance:20
