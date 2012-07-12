@@ -19,8 +19,25 @@ The framework consists of several components:
 
 Requires jQuery 1.7.x and jQuery UI. Tested with jQuery 1.7.2 and jQuery UI 1.8.21.
 
+### How to use
 
-#### ActiveElement
+Current version is **0.9.1**: to use it, get a copy of the library from here:
+
+* **minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.min.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.min.js),
+* **non-minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.js),
+* **non-minified debug** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.debug.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.debug.js).
+
+For the **debug version** in order to see the debug messages, the following library is required:
+
+* **ba-debug.js**: [https://raw.github.com/cowboy/javascript-debug/master/ba-debug.min.js](https://raw.github.com/cowboy/javascript-debug/master/ba-debug.min.js).
+
+### How to report issues
+
+Please use GitHub to report issues: [https://github.com/insideout10/ioiojs/issues](https://github.com/insideout10/ioiojs/issues).
+
+## Components
+
+### ActiveElement
 
 ActiveElement listens for *scroll events* in the browser window and checks for the position of children elements inside the container. The first visible child element is considered the active element:
 
@@ -79,7 +96,7 @@ The event will pass two parameters:
 * **active**: the DOM element of the active section.
 
 
-#### ArrowScroller
+### ArrowScroller
 
 ArrowScroller makes it easy to create horizontally scrollable elements by adding a left and a right arrow at the side of the contents and acts as a complete replacement for the standard horizontal scrollbars:
 
@@ -116,7 +133,7 @@ To set-up ArrowScroller, call the ```arrowscrollers``` method on any container e
 
 
 
-#### Fillify
+### Fillify
 
 Fillify sets the geometry of the different elements of a layout that consists of:
 
@@ -168,7 +185,7 @@ $(".section").fillify({
 });
 ```
 
-#### Mapify
+### Mapify
 
 Mapify greatly simplifies the task of embedding geomaps on a Web page by hiding the underlying complexity of 3rd party libraries such as OpenLayers. With Mapify you can virtually embed any kind of geomap provider, from Google to Bing, from OpenStreetMap to WMS.
 
@@ -194,7 +211,7 @@ $('#container').mapify({
 });
 ```
 
-##### Methods
+#### Methods
 
 A mapified element supports different methods:
 
@@ -241,7 +258,7 @@ $('#container').mapify('popupControl', {
 });
 ```
 
-##### Events
+#### Events
 
 Mapify supports several events that allow to load the different layers (maps, GeoRSS feeds and popup controls) in connection one to the other:
 
@@ -335,7 +352,7 @@ $('#container').on('mapify.georss', function (event, layer) {
 });
 ```
 
-#### Menufy
+### Menufy
 
 Menufy creates a dynamic menu out of a list. The selectors.item parameter specifies the selector for the menu items.
 
@@ -368,7 +385,7 @@ The menu items in the HTML must define the selectors where to scroll the viewpor
 </nav>
 ```
 
-##### Use in combination with ActiveElement
+#### Use in combination with ActiveElement
 
 When used in combination with ActiveElement, the current menu item can be highlighted automatically:
 
@@ -387,7 +404,7 @@ $('#sections').on('activify.newActiveElement', function(event, active) {
 });
 ```
 
-#### PlayerToolbar
+### PlayerToolbar
 
 Creates an HTML toolbar for the video player embedded on the Web page that will take care of these functions:
 
@@ -427,7 +444,7 @@ $("#video-player").playertools(
 });
 ```
 
-#### Scrollbars
+### Scrollbars
 
 Create horizontal scrollbars on any element:
 
@@ -472,7 +489,7 @@ The look of the scrollbars is 100% customizable using few lines of stylesheets (
 }
 ```
 
-#### SlidingMenu
+### SlidingMenu
 
 Creates a sliding menu on the ```#container``` element with specified menu items selector ```#container .item``` and optionally set the minimum width of the menu:
 
@@ -482,7 +499,7 @@ var slidingMenu = window.slidingMenu('#container', '#container .item', 1000);
 
 SlidingMenu will automatically re-center the menu when the viewport is resized.
 
-##### Use in combination with ActiveElement
+#### Use in combination with ActiveElement
 
 When used in combination with ActiveElement, the menu bar can be automatically changed according to the active section:
 
@@ -495,31 +512,31 @@ $('#sections').on('activify.newActiveElement', function(event, active) {
 });
 ```
 
-### RoadMap
+## RoadMap
 
-#### ActiveElement
+### ActiveElement
 
-##### ActiveElement strategy
+#### ActiveElement strategy
 
 Users should be able to choose the strategy used by ActiveElement to determine the active element. In addition to the current (checking for the vertical position of the children elements), a new strategy should be implemented that checks over the visible area of children elements in the viewport. The most visible element should be defined as the active element, and its visibility should be passed as well.
 
-##### Auto-positioning
+#### Auto-positioning
 
 ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
 
-#### Scrollbars
+### Scrollbars
 
 Support vertical scrolling as well.
 
-#### jQuery best-practices
+### jQuery best-practices
 
 Reorganize the code of ActiveElement, PlayerToolbar, Scrollbars and SlidingMenu to follow the jQuery best practices in plug-in development.
 
-#### ActiveElement support
+### ActiveElement support
 
 Plugins with predefined patterns should automatically bind themselves to ActiveElement if it is loaded and configured.
 
-### License
+## License
 
 Copyright (c) 2012 InSideOut10 srl [www.insideout.io](http://www.insideout.io)
 
