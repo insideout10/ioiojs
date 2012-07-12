@@ -1,7 +1,8 @@
-IOIO.JS
-=======
+# IOIO.JS 
 
-![InsideOut10 logo](https://github.com/insideout10/ioiojs/raw/master/images/logo.png)
+![InsideOut10 logo](https://github.com/insideout10/ioiojs/raw/master/images/insideout10-logo-small.gif)
+
+## Overview
 
 Welcome to **ioio.js**, a semantic UI framework developed in connection with [WordLift](http://wordlift.insideout.io).
 
@@ -14,6 +15,10 @@ The framework consists of several components:
 * **Menufy**: creates a dynamic menu from a simple list and automatically moves the current selected menu item on the top of the list. Can be combined with ActiveElement to automatically update itself when the user scrolls the browser.
 * **PlayerToolbar**: creates a 100% reusable HTML toolbar to manage a video player actions and events created via 3rd party libraries (LongTailVideo).
 * **SlidingMenu**: updates the 2nd level navigation menu according to the current section, in combination with ActiveElement, optionally using animations to show the menu.
+
+
+
+
 
 #### ActiveElement
 
@@ -97,3 +102,29 @@ Users should be able to choose the strategy used by ActiveElement to determine t
 ##### Auto-positioning
 
 ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
+
+
+### License
+
+Copyright (c) 2012 InSideOut10 srl (www.insideout.io)
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
