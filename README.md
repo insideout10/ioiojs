@@ -184,12 +184,13 @@ To create a map on a ```#container``` element, call the ```mapify``` method with
 
 ```javascript
 $('#container').mapify({
-		elementId: 'map',
-		openLayersURL: 'http://dev.openlayers.org/releases/OpenLayers-2.11/OpenLayers.js',		cache: true,
-		zoom: 5,
-		title: 'World Map',
-		location: {latitude:41.91613, longitude:12.503052}
-	});
+  elementId: 'map',
+  openLayersURL: 'http://dev.openlayers.org/releases/OpenLayers-2.11/OpenLayers.js',
+  cache: true,
+  zoom: 5,
+  title: 'World Map',
+  location: {latitude:41.91613, longitude:12.503052}
+});
 ```
 
 ##### Methods
@@ -204,10 +205,13 @@ A mapified element supports different methods:
   * **externalGraphic**: the configuration for the markers graphic, can contain placeholders that will be filled with data loaded from the GeoRSS file, ex: ```{url: 'wp-content/uploads/img/marker.png', width: 9, height: 17, select: { width: 14, height: 26 } }```.
 
 ```javascript
-$('#container).mapify( 'geoRSS', {
+$('#container').mapify( 'geoRSS', {
   url: 'wp-admin/admin-ajax.php?action=weeotv.geo_rss&categories=' + value,
   title: key,
-  className: {tag: 'category', attribute: 'term'},
+  className: {
+    tag: 'category',
+    attribute: 'term'
+  },
   externalGraphic: {
     url: 'wp-content/uploads/img/marker_' + value + '.png',
     width: 9,
@@ -232,7 +236,7 @@ $('#container').mapify('popupControl', {
     width: 210,
     height: 250
   },
-  content: '<div class="{className}"><a href="{link}">{title}<img src='{thumbnail}' /></a></div>'
+  content: '<div class="{className}"><a href="{link}">{title}<img src="{thumbnail}" /></a></div>'
 });
 ```
 
@@ -243,8 +247,9 @@ Mapify supports several events that allow to load the different layers (maps, Ge
 * **mapify.create**: a new map has been created,
 
 Load a GeoRSS feed once the map has been created:
+
 ```javascript
-$('#container').on("mapify.create", function (event) {
+$('#container').on('mapify.create', function (event) {
 
   var that = this;
 
@@ -253,7 +258,10 @@ $('#container').on("mapify.create", function (event) {
     $(that).mapify( 'geoRSS', {
       url: 'wp-admin/admin-ajax.php?action=weeotv.geo_rss&categories=' + value,
       title: key,
-      className: {tag: "category", attribute: "term"},
+      className: {
+        tag: 'category',
+        attribute: 'term'
+      },
       externalGraphic: {
         url: 'wp-content/uploads/img/marker_' + value + '.png',
         width: 9,
@@ -314,13 +322,13 @@ Load the popup control once the GeoRSS layer has been loaded:
 ```javascript
 $('#container').on('mapify.georss', function (event, layer) {
 						
-  $(this).mapify("popupControl", {
+  $(this).mapify('popupControl', {
     layer: layer,
     size: {
       width: 210,
       height: 250
     },
-    content: '<div class="{className}"><a href="{link}">{title}<img src='{thumbnail}' /></a></div>'
+    content: '<div class="{className}"><a href="{link}">{title}<img src="{thumbnail}" /></a></div>'
   });
 
 });
