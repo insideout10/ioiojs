@@ -480,7 +480,7 @@ The look of the scrollbars is 100% customizable using few lines of stylesheets (
 }
 
 .scrollbar .scroller {
-    position:relative; // required
+    position:relative; /* required */
 
     width:110px;
     height:14px;
