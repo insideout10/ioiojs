@@ -1,6 +1,7 @@
-# IOIO.JS 
+![ioio.js animated logo](https://github.com/insideout10/ioiojs/raw/master/images/ioiojs-animated-logo.gif)
 
-## Overview
+
+## IOIO.JS Overview
 
 Welcome to **ioio.js**, a semantic UI framework developed in connection with [WordLift](http://wordlift.insideout.io).
 
