@@ -1,7 +1,5 @@
 # IOIO.JS 
 
-![InsideOut10 logo](https://github.com/insideout10/ioiojs/raw/master/images/insideout10-logo-small.gif)
-
 ## Overview
 
 Welcome to **ioio.js**, a semantic UI framework developed in connection with [WordLift](http://wordlift.insideout.io).
@@ -81,6 +79,41 @@ The event will pass two parameters:
 
 #### ArrowScroller
 
+ArrowScroller makes it easy to create horizontally scrollable elements by adding a left and a right arrow at the side of the contents and acts as a complete replacement for the standard horizontal scrollbars:
+
+```
+before:
+
+    ____________ #container ____________
+   |                                    |
+   |                                    |
+   |____________________________________|
+   
+
+after:
+
+  _ ____________ #container ____________ _
+ | |                                    | |
+ |<|                                    |>|
+ |_|____________________________________|_|
+   
+
+```
+
+To set-up ArrowScroller, call the ```arrowscrollers``` method on any container element (```#container``` in our example), by passing the **arrow.width** parameter with the width of the arrows:
+
+```javascript
+("#container").arrowscrollers({
+   settings: {
+     arrow: {
+       width:36
+     }
+   } 
+});
+```
+
+
+
 #### Fillify
 
 #### Mapify
@@ -103,10 +136,15 @@ Users should be able to choose the strategy used by ActiveElement to determine t
 
 ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
 
+#### ArrowScroller
+
+##### jQuery best-practices
+
+Reorganize the code to follow the jQuery best practices in plug-in development.
 
 ### License
 
-Copyright (c) 2012 InSideOut10 srl (www.insideout.io)
+Copyright (c) 2012 InSideOut10 srl [www.insideout.io](http://www.insideout.io)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
