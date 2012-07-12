@@ -462,14 +462,14 @@ The look of the scrollbars is 100% customizable using few lines of stylesheets (
 
 .container {
   position:relative;
-  overflow:auto; // this must be 'hidden' for non-touch based devices; 'auto' for touch-based devices.
+  overflow:auto; /* this must be 'hidden' for non-touch based devices; 'auto' for touch-based devices. */
 }
 
 .scrollbar {
-  position:absolute; // required
+  position:absolute; /* required */
 
-  left:0px; // required
-  bottom:0px; // required
+  left:0px; /* required */
+  bottom:0px; /* required */
 
   background-image: url('img/scrollbar-1px.png');
   background-position: center center;
