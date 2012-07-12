@@ -428,6 +428,27 @@ $("#video-player").playertools(
 
 #### SlidingMenu
 
+Creates a sliding menu on the ```#container``` element with specified menu items selector ```#container .item``` and optionally set the minimum width of the menu:
+
+```javascript
+var slidingMenu = window.slidingMenu('#container', '#container .item', 1000);
+```
+
+SlidingMenu will automatically re-center the menu when the viewport is resized.
+
+##### Use in combination with ActiveElement
+
+When used in combination with ActiveElement, the menu bar can be automatically changed according to the active section:
+
+```javascript
+$('#sections').on('activify.newActiveElement', function(event, active) {
+
+  var menuIndex = $(active).data('menu-index');
+  slidingMenu.slideTo(menuIndex);
+  
+});
+```
+
 ### RoadMap
 
 #### ActiveElement
@@ -440,17 +461,13 @@ Users should be able to choose the strategy used by ActiveElement to determine t
 
 ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
 
-#### ArrowScroller
+#### jQuery best-practices
 
-##### jQuery best-practices
+Reorganize the code of ActiveElement, PlayerToolbar and SlidingMenu to follow the jQuery best practices in plug-in development.
 
-Reorganize the code to follow the jQuery best practices in plug-in development.
+#### ActiveElement support
 
-#### PlayerToolbar
-
-##### jQuery best-practices
-
-Reorganize the code to follow the jQuery best practices in plug-in development.
+Plugins with predefined patterns should automatically bind themselves to ActiveElement if it is loaded and configured.
 
 ### License
 
