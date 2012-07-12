@@ -116,6 +116,56 @@ To set-up ArrowScroller, call the ```arrowscrollers``` method on any container e
 
 #### Fillify
 
+Fillify sets the geometry of the different elements of a layout that consists of:
+
+* a **background** which must be stretched according to the size of the viewport, while respecting defined constraints and maintaining the background aspect ratio,
+* a **container** which is split in a:
+  * a **header** of predefined height,
+  * a **content** that must fill the remaining available space.
+
+```
+ _______________ .section ________________
+|    ___________ .background ___________  |
+|   /                                  /| |
+|  /____________ .container __________/ | | 
+| | ____________ .header ____________ | | |
+| ||                                 || | |
+| ||                                 || | |
+| ||_________________________________|| | |
+| | ____________ .content ___________ | | |
+| ||                                 || | |
+| ||                                 || | |
+| ||                                 || | |
+| ||                                 || | |
+| ||                                 || | |
+| ||                                 || | |
+| ||_________________________________|| / |
+| |___________________________________|/  |
+|_________________________________________|
+:                                         :
+:                                         :
+.                                         .
+
+```
+
+To set-up Fillify, call the ```fillify``` method on a container.
+
+```javascript
+$(".section").fillify();
+```
+
+The ```fillify``` method takes the following parameters to customize the element selectors:
+```javascript
+$(".section").fillify({
+  selectors: {
+    background: ".background",
+    container: ".container",
+    content: ".content",
+    header: ".header"
+  }
+});
+```
+
 #### Mapify
 
 #### Menufy
