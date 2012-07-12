@@ -16,12 +16,12 @@ The framework consists of several components:
 
 ActiveElement listens for *scroll events* in the browser window.
 
-  			/***** A C T I V I F Y *****/
-			$("#sections").activeElement({
-				selector: '.section',
-				tolerance:20
-			});
-
+```
+$('#sections').activeElement({
+  selector: '.section',
+  tolerance:20
+});
+```
 
 #### ArrowScroller
 
