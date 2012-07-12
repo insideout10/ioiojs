@@ -14,8 +14,9 @@ The framework consists of several components:
 * **PlayerToolbar**: creates a 100% reusable HTML toolbar to manage a video player actions and events created via 3rd party libraries (LongTailVideo).
 * **SlidingMenu**: updates the 2nd level navigation menu according to the current section, in combination with ActiveElement, optionally using animations to show the menu.
 
+### Requirements
 
-
+Requires jQuery 1.7.x and jQuery UI. Tested with jQuery 1.7.2 and jQuery UI 1.8.21.
 
 
 #### ActiveElement
@@ -190,7 +191,17 @@ $('#container').mapify({
 	});
 ```
 
+##### Methods
+
+###### GeoRSS
+###### popupControl
+
 ##### Events
+
+###### mapify.create
+###### mapify.georss
+###### mapify.loadStart
+###### mapify.loadEnd
 
 ```javascript
 $('#container').on('mapify.georss', function (event, layer) {
@@ -200,7 +211,7 @@ $('#container').on('mapify.georss', function (event, layer) {
 		$(this).mapify('popupControl', {
 			layer: layer,
 			size: {width: 210, height: 250},
-			content: '<div class='background'></div><div class='content {className}' onClick='eventDispatcher.viewUrl(\'{link}\');'><div class='title'>{title}</div><div class='thumbnail'><img src='{thumbnail}' /></div></div>'
+			content: '<div class="{className}"><a href="{link}">{title}<img src='{thumbnail}' /></a></div>'
 		});
 
 	})
