@@ -14,14 +14,62 @@ The framework consists of several components:
 
 #### ActiveElement
 
-ActiveElement listens for *scroll events* in the browser window.
+ActiveElement listens for *scroll events* in the browser window and checks for the position of children elements inside the container. The first visible child element is considered the active element:
+
+```
+   ____________ #sections ____________
+  | ___________ .section ____________ |
+  ||                                 ||
+  ||     (previous active section)   ||
+  ||                                 ||
+  ||                                 ||
+ ╔═════════════ [viewport] ════════════╗
+ ║||_________________________________||║
+ ║| ___________ .section ____________ |║
+ ║||                                 ||║
+ ║||  (this is the active section)   ||║
+ ║||                                 ||║
+ ║||                                 ||║
+ ╚═════════════════════════════════════╝
+  ||_________________________________||
+  | ___________ .section ____________ |
+  ||                                 ||
+  ||                                 ||
+  ||      (next active section)      ||
+  ||                                 ||
+  ||                                 ||
+  ||_________________________________||
+  :                                   :
+  :                                   :
+  .                                   .
+
+```
+
+In order to set-up ActiveElement, you can configure it on the container element (```#sections``` in our example) with two parameters:
+
+* **selector**: the selector for children elements,
+* **tolerance**: an optional tolerance to be applied to the top of the child elements:
 
 ```javascript
 $('#sections').activeElement({
   selector: '.section',
-  tolerance:20
+  tolerance: 20
 });
 ```
+
+One ActiveElement is set-up, you can listen for ```activify.newActiveElement``` events on the container:
+
+```javascript
+$('#sections').on('activify.newActiveElement', function(event, active) {
+	// your code here...
+};
+```
+
+The event will pass two parameters:
+
+* **event**: a jQuery event instance,
+* **active**: the DOM element of the active section.
+
 
 #### ArrowScroller
 
@@ -34,3 +82,15 @@ $('#sections').activeElement({
 #### PlayerToolbar
 
 #### SlidingMenu
+
+### RoadMap
+
+#### ActiveElement
+
+##### ActiveElement strategy
+
+Users should be able to choose the strategy used by ActiveElement to determine the active element. In addition to the current (checking for the vertical position of the children elements), a new strategy should be implemented that checks over the visible area of children elements in the viewport. The most visible element should be defined as the active element, and its visibility should be passed as well.
+
+##### Auto-positioning
+
+ActiveElement should smoothly scroll the viewport to show the whole active element if configured to do so.
