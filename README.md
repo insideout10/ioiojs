@@ -169,6 +169,19 @@ $(".section").fillify({
 
 #### Mapify
 
+Mapify greatly simplifies the task of embedding geomaps on a Web page by hiding the underlying complexity of 3rd party libraries such as OpenLayers. With Mapify you can virtually embed any kind of geomap provider, from Google to Bing, from OpenStreetMap to WMS.
+
+To create a map on a ```#container``` element, call the ```mapify``` method with the following parameters:
+
+* **openLayersURL** (default ```http://openlayers.org/api/OpenLayers.js```): the URL to the OpenLayers JavaScript file,
+* **cache** (default ```true```): whether to cache the OpenLayer.js file or not,
+* **projection** (default ```EPSG:4326```): the projection to use to translate coordinates,
+* **elementId** (default ```map```): the id of the element that will be created to hold the map,
+* **zoom** (default ```0```): the starting zoom level for the map,
+* **title** (default ```Map```): the map's title,
+* **location**: the starting point of the map expressed as latitude and longitude (i.e. ```{latitude:41.91613, longitude:12.503052}```),
+* **layerSwitcher** (default ```true```): whether to display the layer switcher on the map.
+
 ```javascript
 $('#container').mapify({
 		elementId: 'map',
@@ -176,65 +189,141 @@ $('#container').mapify({
 		zoom: 5,
 		title: 'World Map',
 		location: {latitude:41.91613, longitude:12.503052}
-	})
-	.on('mapify.create', function (event) {
-		var that = this;
-		$.each( geoRSS, function (key, value) {
-			debug.log(key, value)
-			$(that).mapify( 'geoRSS', {
-				url: 'wp-admin/admin-ajax.php?action=weeotv.geo_rss&categories=' + value,
-				title: key,
-				className: {tag: 'category', attribute: 'term'},
-				externalGraphic: {url: 'wp-content/uploads/img/marker_' + value + '.png', width: 9, height: 17, select: { width: 14, height: 26 } }
-			});
-		});
 	});
 ```
 
 ##### Methods
 
-###### GeoRSS
-###### popupControl
+A mapified element supports different methods:
+
+* **geoRSS**: to load a remote GeoRSS file and show its points as markers on the map, it supports the following parameters:
+  * **url** (*required*, default *none*): the URL to the GeoRSS file,
+  * **title** (default ```GeoRSS```): the layer's title,
+  * **className** (default *none*): the name of the element and attribute that define the stylesheets class name that will be used for later use (in Popup Controls),
+  * **radius** (default ```{default: 15, select: 25}```): the size of the marker when unselected and selected,
+  * **externalGraphic**: the configuration for the markers graphic, can contain placeholders that will be filled with data loaded from the GeoRSS file, ex: ```{url: 'wp-content/uploads/img/marker.png', width: 9, height: 17, select: { width: 14, height: 26 } }```.
+
+```javascript
+$('#container).mapify( 'geoRSS', {
+  url: 'wp-admin/admin-ajax.php?action=weeotv.geo_rss&categories=' + value,
+  title: key,
+  className: {tag: 'category', attribute: 'term'},
+  externalGraphic: {
+    url: 'wp-content/uploads/img/marker_' + value + '.png',
+    width: 9,
+    height: 17,
+    select: {
+   	    width: 14,
+  	    height: 26
+   	}
+  }
+});
+```
+
+* **popupControl**: to configure a customized popup control that will appear when the user clicks on a marker on the map; it accepts the following parameters:
+  * **layer** (*required*, default *none*): the layer to which to bind the popup control,
+  * **size** (default ```{width: 230, height: 250}```): the size of the popup,
+  * **content** (*required*, default *none*): the HTML contents of the popup control, placeholders can be used here.
+
+```javascript
+$('#container').mapify('popupControl', {
+  layer: layer,
+  size: {
+    width: 210,
+    height: 250
+  },
+  content: '<div class="{className}"><a href="{link}">{title}<img src='{thumbnail}' /></a></div>'
+});
+```
 
 ##### Events
 
-###### mapify.create
-###### mapify.georss
-###### mapify.loadStart
-###### mapify.loadEnd
+Mapify supports several events that allow to load the different layers (maps, GeoRSS feeds and popup controls) in connection one to the other:
+
+* **mapify.create**: a new map has been created,
+
+Load a GeoRSS feed once the map has been created:
+```javascript
+$('#container').on("mapify.create", function (event) {
+
+  var that = this;
+
+  $.each( geoRSS, function (key, value) {
+
+    $(that).mapify( 'geoRSS', {
+      url: 'wp-admin/admin-ajax.php?action=weeotv.geo_rss&categories=' + value,
+      title: key,
+      className: {tag: "category", attribute: "term"},
+      externalGraphic: {
+        url: 'wp-content/uploads/img/marker_' + value + '.png',
+        width: 9,
+        height: 17,
+        select: {
+          width: 14,
+          height: 26
+        }
+      }
+    });
+
+  });
+
+});
+```
+
+* **mapify.loadStart**: a layer is loading data,
+
+Update a status message while the layers are loading:
+```javascript
+$('#container').on('mapify.loadStart', function (event) {
+
+  loads = $('#map-status').data('loads') || 0;
+  
+  $('#map-status .message').html('Loading (' + ++loads + ')...');
+  $('#map-status').show();
+  $('#map-status').data({
+    loads: loads
+  });
+  
+});
+```
+
+* **mapify.loadEnd**: a layer finished loading data,
+
+Update and finally hide the status message when the loading is complete:
+
+```javascript
+$('#container').on('mapify.loadEnd', function (event) {
+
+  loads = $('#map-status').data('loads') || 1;
+
+  $('#map-status .message').html('Loading (' + --loads + ')...');
+  
+  if (0 === loads)
+    $('#map-status').hide();
+    
+  $('#map-status').data({
+    loads: loads
+  });
+});
+```
+
+* **mapify.georss**: a GeoRSS layer has been loaded, the event will deliver the related layer as a parameter to the event.
+
+Load the popup control once the GeoRSS layer has been loaded:
 
 ```javascript
 $('#container').on('mapify.georss', function (event, layer) {
-		
-		// once the georss has been loaded,
-		// add the popupcontrol on the layer.
-		$(this).mapify('popupControl', {
-			layer: layer,
-			size: {width: 210, height: 250},
-			content: '<div class="{className}"><a href="{link}">{title}<img src='{thumbnail}' /></a></div>'
-		});
+						
+  $(this).mapify("popupControl", {
+    layer: layer,
+    size: {
+      width: 210,
+      height: 250
+    },
+    content: '<div class="{className}"><a href="{link}">{title}<img src='{thumbnail}' /></a></div>'
+  });
 
-	})
-	.on('mapify.loadStart', function (event) {
-		loads = $('#map-status').data('loads') || 0;
-
-		$('#map-status .message')
-			.html('Loading (' + ++loads + ')...');
-		$('#map-status').show();
-
-		$('#map-status').data({loads: loads});
-	})
-	.on('mapify.loadEnd', function (event) {
-		loads = $('#map-status').data('loads') || 1;
-
-		$('#map-status .message')
-			.html('Caricamento in corso (' + --loads + ')...');
-
-		if (0 === loads)
-			$('#map-status').hide();
-
-		$('#map-status').data({loads: loads});
-	});
+});
 ```
 
 #### Menufy
