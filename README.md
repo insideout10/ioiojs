@@ -336,6 +336,56 @@ $('#container').on('mapify.georss', function (event, layer) {
 
 #### Menufy
 
+Menufy creates a dynamic menu out of a list. The selectors.item parameter specifies the selector for the menu items.
+
+```javascript
+$('#container').menufy({
+  selectors: {
+    item: '.item'
+  }
+});
+```
+
+The menu items in the HTML must define the selectors where to scroll the viewport when the user selects a menu item:
+
+* **data-section-selector**: the selector used to get the element that the viewport shall scroll to,
+* **data-menu-selector**: the selector used to identify and highlight the menu item when the user scrolls the viewport.
+
+```html
+<nav id="#container">
+  <ul>
+    <li class="item hideable section-1"
+      data-section-selector=".section.section-1"
+      data-menu-selector=".section-1">Section 1</li>
+    <li class="item hideable section-2"
+      data-section-selector=".section.section-2"
+      data-menu-selector=".section-2">Section 2</li>
+    <li class="item hideable section-3"
+      data-section-selector=".section.section-3"
+      data-menu-selector=".section-3">Section 3</li>
+  </ul>
+</nav>
+```
+
+##### Use in combination with ActiveElement
+
+When used in combination with ActiveElement, the current menu item can be highlighted automatically:
+
+```javascript
+$('#sections').on('activify.newActiveElement', function(event, active) {
+
+  var menuSelector = $(active).data('menu-selector');
+
+  if (undefined == menuSelector)
+    return;
+
+   var activeMenu = $('#container ' + menuSelector);
+   
+   $('#container').menufy('select', activeMenu);
+
+});
+```
+
 #### PlayerToolbar
 
 #### SlidingMenu
