@@ -1,0 +1,16 @@
+{
+  "name": "ioiojs",
+  "version": "0.9.1",
+  "url": "http://www.insideout.io/",
+  "author": "David Riccitelli <david@insideout.io>",
+  "contributors": [
+    {
+        "name": "Andrea Volpini",
+        "email": "andrea@insideout.io"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.2"
+  },
+  "license": "MIT"  
+}
