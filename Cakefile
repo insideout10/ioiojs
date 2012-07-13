@@ -60,3 +60,10 @@ task 'minify', 'Minify the output file.', ->
     throw err if err
     console.log stdout + stderr
     console.log 'Done.'
+
+
+task 'test', 'Test the minified file', ->
+  exec "java -jar bin/JsTestDriver-1.3.4.b.jar --tests all --captureConsole", (err, stdout, stderr) ->
+    throw err if err
+    console.log stdout + stderr
+    console.log 'Done.'
