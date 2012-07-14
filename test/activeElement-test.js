@@ -56,7 +56,6 @@ AsyncTestCase("ActiveElementTest", {
 
         // set the currentActive.
         queue.call('check that active has changed 1', function() {
-            console.log('check that active has changed 1');
 
             assertNotNull( currentActive );
             assertEquals( 1, $(currentActive).data('index') );
@@ -66,7 +65,6 @@ AsyncTestCase("ActiveElementTest", {
         });
 
         queue.call('check that active has changed 2', function() {
-            console.log('check that active has changed 2');
 
             assertNotNull( currentActive );
             assertEquals( 2, $(currentActive).data('index') );
