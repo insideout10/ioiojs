@@ -34,10 +34,16 @@ For the **debug version** in order to see the debug messages, the following libr
 
 ### How to test
 
-**IOIO.JS** uses **JsTestDriver** for testing purposes. To test it, clone the code then start the JsTestDriver by running
-```java -jar bin/JsTestDriver-1.3.4.b.jar --config jsTestDriver.conf --port 4224 --browser /Applications/Firefox.app,/Applications/Google\ Chrome.app,/Applications/Safari.app``` from the project root folder.
+**IOIO.JS** uses **JsTestDriver** for testing purposes. To run the automated test, clone the code then start the JsTestDriver by running from the project root folder:
 
-Be sure to point at your browsers location with the ```--browser``` switch.
+```sh
+java -jar bin/JsTestDriver-1.3.4.b.jar \
+ --config jsTestDriver.conf \
+ --port 4224 \
+ --browser /Applications/Firefox.app,/Applications/Google\ Chrome.app,/Applications/Safari.app
+ ```
+
+Be sure to point at your browsers locations with the ```--browser``` switch.
 
 Then run ```cake test``` to run the automated tests.
 
