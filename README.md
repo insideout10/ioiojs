@@ -371,7 +371,7 @@ The menu items in the HTML must define the selectors where to scroll the viewpor
 * **data-menu-selector**: the selector used to identify and highlight the menu item when the user scrolls the viewport.
 
 ```html
-<nav id="#container">
+<nav id="container">
   <ul>
     <li class="item hideable section-1"
       data-section-selector=".section.section-1"
