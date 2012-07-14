@@ -40,7 +40,8 @@ java -jar bin/JsTestDriver-1.3.4.b.jar \
  --config jsTestDriver.conf \
  --port 4224 \
  --browser /Applications/Firefox.app,/Applications/Google\ Chrome.app,/Applications/Safari.app
- ``` from the project root folder.
+ ```
+from the project root folder.
 
 Be sure to point at your browsers location with the ```--browser``` switch.
 
