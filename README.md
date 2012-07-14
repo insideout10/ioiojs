@@ -32,6 +32,15 @@ For the **debug version** in order to see the debug messages, the following libr
 
 * **ba-debug.js**: [https://raw.github.com/cowboy/javascript-debug/master/ba-debug.min.js](https://raw.github.com/cowboy/javascript-debug/master/ba-debug.min.js).
 
+### How to test
+
+**IOIO.JS** uses **JsTestDriver** for testing purposes. To test it, clone the code then start the JsTestDriver by running
+```java -jar bin/JsTestDriver-1.3.4.b.jar --config jsTestDriver.conf --port 4224 --browser /Applications/Firefox.app,/Applications/Google\ Chrome.app,/Applications/Safari.app``` from the project root folder.
+
+Be sure to point at your browsers location with the ```--browser``` switch.
+
+Then run ```cake test``` to run the automated tests.
+
 ### How to report issues
 
 Please use GitHub to report issues: [https://github.com/insideout10/ioiojs/issues](https://github.com/insideout10/ioiojs/issues).
