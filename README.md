@@ -43,7 +43,7 @@ java -jar bin/JsTestDriver-1.3.4.b.jar \
  --browser /Applications/Firefox.app,/Applications/Google\ Chrome.app,/Applications/Safari.app
  ```
 
-Be sure to point at your browsers location with the ```--browser``` switch.
+Be sure to point at your browsers locations with the ```--browser``` switch.
 
 Then run ```cake test``` to run the automated tests.
 
