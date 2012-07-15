@@ -156,17 +156,17 @@ $('.container').arrowscrollers({
 The following stylesheets are required:
 
 ```css
-  .arrowscroller.left, .arrowscroller.right {
-    height: height-of-the-container;
-  }
+.arrowscroller.left, .arrowscroller.right {
+  height: height-of-the-container;
+}
 
-  .arrowscroller.left {
-    background: url('url-to-the-left-arrow-image') center center no-repeat;
-  }
+.arrowscroller.left {
+  background: url('url-to-the-left-arrow-image') center center no-repeat;
+}
 
-  .arrowscroller.right {
-    background: url('url-to-the-right-arrow-image') center center no-repeat;
-  }
+.arrowscroller.right {
+  background: url('url-to-the-right-arrow-image') center center no-repeat;
+}
 
 ```
 
