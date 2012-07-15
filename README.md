@@ -119,17 +119,21 @@ ArrowScroller makes it easy to create horizontally scrollable elements by adding
 ```
 before:
 
-    ____________ #container ____________
-   |                                    |
-   |                                    |
+    ____________ .container ____________
+   | ___________ .content _____________ |
+   ||                                  ||
+   ||                                  ||
+   ||__________________________________||
    |____________________________________|
    
 
 after:
 
-  _ ____________ #container ____________ _
- | |                                    | |
- |<|                                    |>|
+  _ ____________ .container ____________ _
+ | | ___________ .content _____________ | |
+ | ||                                  || |
+ |<||                                  ||>|
+ | ||__________________________________|| |
  |_|____________________________________|_|
    
 
@@ -138,7 +142,7 @@ after:
 To set-up ArrowScroller, call the ```arrowscrollers``` method on any container element (```#container``` in our example), by passing the **arrow.width** parameter with the width of the arrows:
 
 ```javascript
-('#container').arrowscrollers({
+$('.container').arrowscrollers({
    settings: {
      arrow: {
        width:36
@@ -147,6 +151,53 @@ To set-up ArrowScroller, call the ```arrowscrollers``` method on any container e
 });
 ```
 
+#### Stylesheets
+
+The following stylesheets are required:
+
+```css
+.arrowscroller {
+  &.left, &.right {
+    height:*height-of-the-container*;
+  }
+
+  &.left {
+    background: url('*url-to-the-left-arrow-image*') center center no-repeat;
+  }
+
+  &.right {
+    background: url('*url-to-the-right-arrow-image*') center center no-repeat;
+  }
+}
+```
+
+The **container** must have the following styles applied:
+
+```css
+.container {
+  overflow-x: scroll;
+  width: *width-of-the-container*;
+}
+```
+
+The **content** must have the following styles applied:
+
+```css
+.container .content {
+    width: *width-of-the-content*;
+    height: *height-of-the-content*;
+
+    white-space: nowrap;
+}
+```
+
+Elements inside the **content** must have the following styles applied:
+
+```css
+.container .content > * {
+      display: inline-block;
+}
+```
 
 
 ### Fillify
