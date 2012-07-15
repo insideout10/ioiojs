@@ -22,11 +22,11 @@ Requires jQuery 1.7.x and jQuery UI. Tested with jQuery 1.7.2 and jQuery UI 1.8.
 
 ### How to use
 
-Current version is **0.9.1**: to use it, get a copy of the library from here:
+Current version is **0.9.2**: to use it, get a copy of the library from here:
 
-* **minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.min.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.min.js),
-* **non-minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.js),
-* **non-minified debug** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.debug.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.1.debug.js).
+* **minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.2.min.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.2.min.js),
+* **non-minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.2.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.2.js),
+* **non-minified debug** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.2.debug.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.2.debug.js).
 
 For the **debug version** in order to see the debug messages, the following library is required:
 
