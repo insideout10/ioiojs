@@ -15,6 +15,7 @@
         right: 'right'
       arrow:
         width:36
+      marginTop: true
     ,options
     
     # create a fake debug if the debug does not exist.
@@ -70,14 +71,17 @@
         .css('width',settings.arrow.width)
         .css('height',height)
         .css('margin-left',width + margin)
-        .css('margin-top',-height)
         .css('cursor','pointer')
         .click(doScrollLeft)
-      
+
       element
         .css('margin-left',margin)
-        .css('margin-top',-height)
         .before(arrowLeft)
         .after(arrowRight)
+
+      if (true is setttings.marginTop)
+        arrowRight.css('margin-top',-height)
+        element.css('margin-top',-height)
+
 
 )(jQuery)
