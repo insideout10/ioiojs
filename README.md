@@ -156,19 +156,18 @@ $('.container').arrowscrollers({
 The following stylesheets are required:
 
 ```css
-.arrowscroller {
-  &.left, &.right {
+  .arrowscroller.left, .arrowscroller.right {
     height: height-of-the-container;
   }
 
-  &.left {
+  .arrowscroller.left {
     background: url('url-to-the-left-arrow-image') center center no-repeat;
   }
 
-  &.right {
+  .arrowscroller.right {
     background: url('url-to-the-right-arrow-image') center center no-repeat;
   }
-}
+
 ```
 
 The **container** must have the following styles applied:
