@@ -72,6 +72,7 @@
         .css('height',height)
         .css('margin-left',width + margin)
         .css('cursor','pointer')
+        .css('margin-top',-height)
         .click(doScrollLeft)
 
       element
@@ -80,7 +81,6 @@
         .after(arrowRight)
 
       if (true is setttings.marginTop)
-        arrowRight.css('margin-top',-height)
         element.css('margin-top',-height)
 
 
