@@ -158,15 +158,15 @@ The following stylesheets are required:
 ```css
 .arrowscroller {
   &.left, &.right {
-    height:*height-of-the-container*;
+    height: height-of-the-container;
   }
 
   &.left {
-    background: url('*url-to-the-left-arrow-image*') center center no-repeat;
+    background: url('url-to-the-left-arrow-image') center center no-repeat;
   }
 
   &.right {
-    background: url('*url-to-the-right-arrow-image*') center center no-repeat;
+    background: url('url-to-the-right-arrow-image') center center no-repeat;
   }
 }
 ```
@@ -176,7 +176,7 @@ The **container** must have the following styles applied:
 ```css
 .container {
   overflow-x: scroll;
-  width: *width-of-the-container*;
+  width: width-of-the-container;
 }
 ```
 
@@ -184,8 +184,8 @@ The **content** must have the following styles applied:
 
 ```css
 .container .content {
-    width: *width-of-the-content*;
-    height: *height-of-the-content*;
+    width: width-of-the-content;
+    height: height-of-the-content;
 
     white-space: nowrap;
 }
