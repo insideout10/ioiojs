@@ -16,6 +16,10 @@ The framework consists of several components:
 * **Scrollbars**: creates non-obstrusive scrollbars that work just anywhere (Firefox included) and don't break your existing CSS.
 * **SlidingMenu**: updates the 2nd level navigation menu according to the current section, in combination with ActiveElement, optionally using animations to show the menu.
 
+### Announcements
+
+Read the **WordLift** and **IOIO.JS** announcement on the IKS Project web site: [http://blog.iks-project.eu/wordlift-powers-enel-tv-semantic-tv-example/](http://blog.iks-project.eu/wordlift-powers-enel-tv-semantic-tv-example/).
+
 ### Requirements
 
 Requires jQuery 1.7.x and jQuery UI. Tested with jQuery 1.7.2 and jQuery UI 1.8.21.
