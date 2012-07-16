@@ -70,7 +70,7 @@ We would like to thank its contributors and supporters:
 
 * IKS Consortium for allowing as to join the [Early Adopter Programme](http://www.iks-project.eu/community/partners/insideout10) and for awarding WordLift 2.0 at the [Semantic UX Contest in 2011](http://wordlift.insideout.io/what-does-it-mean-to-win-the-iks-semantic-ux-contest/).
 * [Enel Spa](http://www.enel.com) for investing on semantic web technologies, start-ups and open innovation.
-* [JetBrains](http://www.jetbrains.com/) for providing [Open Source](http://www.jetbrains.com/phpstorm/buy/buy.jsp#openSource) licenses to their IDEs, PhpStorm and WebStorm.
+* [JetBrains](http://www.jetbrains.com/) for providing [Open Source](http://www.jetbrains.com/phpstorm/buy/buy.jsp#openSource) licenses of their IDE products, PhpStorm and WebStorm, for the development of this project.
 
 
 ## Components
