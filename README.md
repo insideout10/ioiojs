@@ -20,6 +20,7 @@ The framework consists of several components:
 
 Read the **WordLift** and **IOIO.JS** announcement on the IKS Project web site: [http://blog.iks-project.eu/wordlift-powers-enel-tv-semantic-tv-example/](http://blog.iks-project.eu/wordlift-powers-enel-tv-semantic-tv-example/).
 
+
 ### Requirements
 
 Requires jQuery 1.7.x and jQuery UI. Tested with jQuery 1.7.2 and jQuery UI 1.8.21.
@@ -54,6 +55,23 @@ Then run ```cake test``` to run the automated tests.
 ### How to report issues
 
 Please use GitHub to report issues: [https://github.com/insideout10/ioiojs/issues](https://github.com/insideout10/ioiojs/issues).
+
+### Special thanks and contributors
+
+**ioio.js** is *Open Source* software started as an initiative of InsideOut10 for the [WordLift plug-in](http://wordlift.insideout.io).
+
+| | |
+|-|-|
+|![Open Source logo](https://github.com/insideout10/ioiojs/raw/master/images/osi_standard_logo.png)|![InsideOut10 logo](https://github.com/insideout10/ioiojs/raw/master/images/insideout-logo.png)<br/>![IKS Consortium](images/iks-logo_small.png)|
+
+
+
+We would like to thank its contributors and supporters:
+
+* [IKS Consortium](http://www.iks-project.eu)
+* [Enel Spa](http://www.enel.com)
+* [JetBrains](http://www.jetbrains.com/) for providing [Open Source](http://www.jetbrains.com/phpstorm/buy/buy.jsp#openSource) licenses to their IDEs, PhpStorm and WebStorm.
+
 
 ## Components
 
