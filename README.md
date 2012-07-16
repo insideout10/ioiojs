@@ -60,12 +60,9 @@ Please use GitHub to report issues: [https://github.com/insideout10/ioiojs/issue
 
 **ioio.js** is *Open Source* software started as an initiative of InsideOut10 for the [WordLift plug-in](http://wordlift.insideout.io).
 
-<table>
-<tr>
-	<td> ![Open Source logo](https://github.com/insideout10/ioiojs/raw/master/images/osi_standard_logo.png) </td>
-	<td> ![InsideOut10 logo](https://github.com/insideout10/ioiojs/raw/master/images/insideout-logo.png) <br/> ![IKS Consortium](images/iks-logo_small.png) </td>
-</tr>
-</table>
+<div style="float:right;"><img src="https://github.com/insideout10/ioiojs/raw/master/images/osi_standard_logo.png" /></div>
+![InsideOut10 logo](https://github.com/insideout10/ioiojs/raw/master/images/insideout-logo.png) <br/>
+![IKS Consortium](images/iks-logo_small.png)
 
 We would like to thank its contributors and supporters:
 
