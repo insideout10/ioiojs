@@ -157,6 +157,6 @@
     # Method calling logic
     return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 )) if methods[method]?
     return methods.init.apply( this, arguments ) if "object" is typeof method or not method?
-    $.error( "Method #{method }does not exist on scrollbars" )
+    $.error( "Method #{method} does not exist on scrollbars" )
 
 )(jQuery)
