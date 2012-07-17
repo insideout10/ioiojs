@@ -19,22 +19,26 @@
     init: (options) ->
       @each (index, item) ->
 
+        # set the class-name of the scroller element.
+        scroller = "scroller"
+        # set the class-name of the scrollbar element.
+        scrollbar = "scrollbar"
+
         # get references to actual jQuery objects:
         #  1] the $container, i.e. the element on which scrollbars() is called and that will scroll.
         #  2] the $scrollbar, i.e. the long line that will contain the scroller.
         #  3] the $scroller, i.e. that tiny button that the user will drag around to scroll the $container.
         $container = $(item)
 
+        # remove the ugly scrollbars, unless we're on a touchy device to avoid the user loosing the possibility
+        # to scroll with his fingers.
+        $container.css("overflow", "hidden") if false is Modernizr?.touch
+
+        $container.children("#{scrollbar}").remove()
+
         # skip this item if scrolling is not necessary.
         # debug.log(item.scrollWidth, $container.width())
         return true if item.scrollWidth <= $container.width()
-
-        # set the class-name of the scroller element.
-        scroller = "scroller"
-        # set the class-name of the scrollbar element.
-        scrollbar = "scrollbar"
-
-        $container.children("#{scrollbar}").remove()
 
         $scrollbar = $("<div class=\"#{scrollbar}\"></div>").appendTo($container)
         $scroller = $("<div class=\"#{scroller}\"></div>").appendTo($scrollbar)
@@ -42,10 +46,6 @@
         $container.addClass("scroll-container")
         $scrollbar.css("left", $container.scrollLeft())
         $scrollbar.css("width", $container.width())
-
-        # remove the ugly scrollbars, unless we're on a touchy device to avoid the user loosing the possibility
-        # to scroll with his fingers.
-        $container.css("overflow", "hidden") if false is Modernizr?.touch
 
         # calculate the constraints for dragging the scroller around, to be passed to the jQuery UI draggable.
         x1 = $container.offset().left
