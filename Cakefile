@@ -9,6 +9,7 @@ appFiles  = [
   'ioiojs/mapify'
   'ioiojs/menufy'
   'ioiojs/playerToolbar'
+  'ioiojs/scrollbars'
   'ioiojs/slidingMenu'
 ]
 
