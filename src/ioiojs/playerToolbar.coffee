@@ -5,85 +5,81 @@
 # http://wordlift.insideout.io/
 (($) ->
 
-  $.fn.playertools = (player, options) ->
-    
-    # create a fake debug object.
-    if false is (debug = window.debug)?
-      debug = {log: ->}
-    
-    debug.log "loading playertools."
+  # create a fake debug object.
+  if false is (debug = window.debug)?
+    debug = {log: ->}
 
-    settings = $.extend
-      screens:
-        normal:
-          width:640
-          height:480
-        larger:
-          width:960
-          height:720
-      urls: null
-    ,options
+  methods =
+    init: (options) ->
 
-    # create an instance with the methods.
-    playertools =
-      isFlash: (element) ->
-        return "OBJECT" is element.get(0).tagName
-      playPause: (player) ->
-        debug.log(player.getWidth() + "/" + player.getHeight())
-        # pause the play if the player is playing.
-        return player.pause(true) if "BUFFERING" is player.getState() or "PLAYING" is player.getState()
-        
-        # play if the player is paused/stopped.
-        player.play(true)
-      share: ->
-        debug.log("share")
+      settings = $.extend
+          screens:
+            normal:
+              width:640
+              height:480
+            larger:
+              width:960
+              height:720
+          urls: null
+          player: null
+          webtrends: { host: null, path: null, title: null }
+        , options
 
+      player = settings.player
 
-    @each ->
-      element = $(@)
-            
-      toolbar = $("<div class=\"insideout-playertools toolbar\"></div>")
-        .width(player.getWidth())
+      debug.log( "PlayerTools initializing.", player, settings )
 
-      playButton = $("<div class=\"button play\"></div>")
-        .appendTo(toolbar)
-        .click( -> playertools.playPause(player) )
-        
-      timeSlider = $("<div class=\"slider time\"></div>")
-        .appendTo(toolbar)
-        
-      progressBar = $("<div class=\"progress-container\"><div class=\"progress\"></div></div>")
-        .appendTo(timeSlider)
-        .click( (event) ->
-          # get the max width.
-          maxWidth = progressBar.width()
-          # get the clicked X.
-          x = event.pageX - progressBar.offset().left
-          debug.log x
-          # get the duration.
-          duration = player.getDuration()
-          # get the clicked position.
-          position = x * (duration / maxWidth)
-          # set the position.
-          player.seek(position) 
-        )
-      
-      # add a separator.
-      $("<div class=\"separator\"></div>")
-        .appendTo(toolbar)
+      @each (index, item) ->
+        # ...
+        element = $(item)
 
-      volumeButton = $("<div class=\"button volume\"></div>")
-        .appendTo(toolbar)
-        .click( ->
-          player.setMute()
-        )
-        
-      volumeButton.addClass("mute") if true is player.getMute()
+        # save the settings.
+        element.data
+          settings: settings
 
-      volumeSlider = $("<div class=\"slider volume\"><div class=\"container\"><div id=\"volume-slider\"></div></div></div>")
-        .appendTo(toolbar)
+        toolbar = $("<div class=\"insideout-playertools toolbar\"></div>")
+          .width(player.getWidth())
 
-      volumeSlider.find("#volume-slider").slider(
+        playButton = $("<div class=\"button play\"></div>")
+          .appendTo(toolbar)
+          .click ->
+            # pause the play if the player is playing.
+            return player.pause(true) if "BUFFERING" is player.getState() or "PLAYING" is player.getState()
+            # play if the player is paused/stopped.
+            player.play(true)
+
+        timeSlider = $("<div class=\"slider time\"></div>")
+          .appendTo(toolbar)
+
+        progressBar = $("<div class=\"progress-container\"><div class=\"progress\"></div></div>")
+          .appendTo(timeSlider)
+          .click (event) ->
+            # get the max width.
+            maxWidth = progressBar.width()
+            # get the clicked X.
+            x = event.pageX - progressBar.offset().left
+            # get the duration.
+            duration = player.getDuration()
+            # get the clicked position.
+            position = x * (duration / maxWidth)
+            # set the position.
+            player.seek(position)
+
+        # add a separator.
+        $("<div class=\"separator\"></div>")
+          .appendTo(toolbar)
+
+        volumeButton = $("<div class=\"button volume\"></div>")
+          .appendTo(toolbar)
+          .click ->
+            player.setMute()
+
+        volumeButton.addClass("mute") if true is player.getMute()
+
+        volumeSlider = $("<div class=\"slider volume\"><div class=\"container\"><div id=\"volume-slider\"></div></div></div>")
+          .appendTo(toolbar)
+
+        volumeSlider.find("#volume-slider").slider
           min:0
           max:100
           range:"min"
@@ -91,84 +87,75 @@
           slide: (event, ui) ->
             # debug.log(event)
             # debug.log(ui)
-            player.setVolume(ui.value)
-        )
-      
-      # add a separator.
-      $("<div class=\"separator\"></div>")
-        .appendTo(toolbar)
-      
-      normalScreenButton = $("<div class=\"button normal-screen selected\"></div>")
-        .appendTo(toolbar)
-        .click( ->
-          element.trigger("playertools.willresize", "normal")
+            player.setVolume( ui.value )
 
-          player.resize( settings.screens.normal.width, settings.screens.normal.height)
-          normalScreenButton.addClass("selected")
-          largerScreenButton.removeClass("selected")
-          fullScreenButton.removeClass("selected")
+        # add a separator.
+        $("<div class=\"separator\"></div>")
+          .appendTo(toolbar)
 
-          element.trigger("playertools.resize", "normal")
-        )
+        normalScreenButton = $("<div class=\"button normal-screen selected\"></div>")
+          .appendTo(toolbar)
+          .click ->
+            element.trigger("playertools.willresize", "normal")
 
-      $(document.documentElement).keyup (event) ->
-        normalScreenButton.trigger("click") if 27 is event.keyCode
-      
-      largerScreenButton = $("<div class=\"button larger-screen\"></div>")
-        .appendTo(toolbar)
-        .click( ->
-          element.trigger("playertools.willresize", "large")
+            player.resize( settings.screens.normal.width, settings.screens.normal.height)
+            normalScreenButton.addClass("selected")
+            largerScreenButton.removeClass("selected")
+            fullScreenButton.removeClass("selected")
 
-          player.resize( settings.screens.larger.width, settings.screens.larger.height)
-          largerScreenButton.addClass("selected")
-          normalScreenButton.removeClass("selected")
-          fullScreenButton.removeClass("selected")
+            element.trigger("playertools.resize", "normal")
 
-          element.trigger("playertools.resize", "large")
-        )
-      
-      fullScreenButton = $("<div class=\"button full-screen\"></div>")
-        .appendTo(toolbar)
-        .click( ->
-          element.trigger("playertools.willresize", "full")
+        $(document.documentElement).keyup (event) ->
+          normalScreenButton.trigger("click") if 27 is event.keyCode
 
-          width = $(window).width()
-          height = $(window).height() - toolbar.height() - element.position().top
-          player.resize( width, height )
-          # if playertools.isFlash(element)
-          #   ...
-          # else
-          #   player.setFullscreen(true)
+        largerScreenButton = $("<div class=\"button larger-screen\"></div>")
+          .appendTo(toolbar)
+          .click ->
+            element.trigger("playertools.willresize", "large")
 
-          fullScreenButton.addClass("selected")
-          largerScreenButton.removeClass("selected")
-          normalScreenButton.removeClass("selected")
+            player.resize( settings.screens.larger.width, settings.screens.larger.height)
+            largerScreenButton.addClass("selected")
+            normalScreenButton.removeClass("selected")
+            fullScreenButton.removeClass("selected")
 
-          element.trigger("playertools.resize", "full")
-        )
+            element.trigger("playertools.resize", "large")
 
-      qualitySelector = $("<div id=\"video-quality\"><ul><li class=\"item selected sq\" data-quality=\"sq\"></li><li class=\"item hq\" data-quality=\"hq\"></li><li class=\"item hd\" data-quality=\"hd\"></li></ul></div>")
-        .appendTo(toolbar)
+        fullScreenButton = $("<div class=\"button full-screen\"></div>")
+          .appendTo(toolbar)
+          .click ->
+            element.trigger("playertools.willresize", "full")
 
-      qualitySelector
-        .mouseenter( (event) ->
-          width = qualitySelector.width()
-          qualitySelector.find("li").show()
-          add = qualitySelector.width() - width
-          qualitySelector.css("margin-left", -add)
-        )
-        .mouseleave( (event) ->
-          qualitySelector.find("li").not(".selected").hide()
-          qualitySelector.css("margin-left", 0)
-        )
-        .find(".item")
-          .click( (event) ->
+            width = $(window).width()
+            height = $(window).height() - toolbar.height() - element.position().top
+            player.resize( width, height )
+            fullScreenButton.addClass("selected")
+            largerScreenButton.removeClass("selected")
+            normalScreenButton.removeClass("selected")
+
+            element.trigger("playertools.resize", "full")
+
+        qualitySelector = $("<div id=\"video-quality\"><ul><li class=\"item selected sq\" data-quality=\"sq\"></li><li class=\"item hq\" data-quality=\"hq\"></li><li class=\"item hd\" data-quality=\"hd\"></li></ul></div>")
+          .appendTo(toolbar)
+
+        qualitySelector
+          .mouseenter (event) ->
+            width = qualitySelector.width()
+            qualitySelector.find("li").show()
+            add = qualitySelector.width() - width
+            qualitySelector.css("margin-left", -add)
+
+          .mouseleave (event) ->
+            qualitySelector.find("li").not(".selected").hide()
+            qualitySelector.css("margin-left", 0)
+
+          .find(".item")
+          .click (event) ->
             target = $(event.target)
 
             target
               .addClass("selected")
               .siblings()
-                .removeClass("selected")
+              .removeClass("selected")
 
             qualitySelector.trigger("mouseleave")
 
@@ -183,86 +170,110 @@
 
             # get the current position.
             position = player.getPosition()
-            
+
             # play the url.
             player.load
-                file:url
-                start:position
-          )
+              file:url
+              start:position
           .not(".selected")
             .hide()
 
-      # add a separator.
-      $("<div class=\"separator\"></div>")
-        .appendTo(toolbar)
+        # add a separator.
+        $("<div class=\"separator\"></div>")
+          .appendTo(toolbar)
 
-      shareButton = $("<div class=\"button share\"></div>")
-        .appendTo(toolbar)
-        .click( ->
-          playertools.share()
-        )
+        shareButton = $("<div class=\"button share\"></div>")
+          .appendTo(toolbar)
+          .click ->
+            playertools.share()
 
-      switchToPause =  ->
-        playButton
-          .removeClass("play")
-          .addClass("pause")
-          
-      switchToPlay = ->
-        playButton
-          .removeClass("pause")
-          .addClass("play")
-          
-      updateProgress = (event) =>
-        return if @updateProgressTimeout?
-        @updateProgressTimeout = setTimeout( =>
-            # get the max position
-            maxWidth = timeSlider.children(".progress-container").width()
-            timeSlider.find(".progress").width( event.position * (maxWidth / event.duration) )
-            @updateProgressTimeout = null
-        ,500)
-          
-      updateMute = (event) ->
-        if true is event.mute
-          volumeButton.addClass("mute")
-        else
-          volumeButton.removeClass("mute")
+        switchToPause =  ->
+          playButton
+            .removeClass("play")
+            .addClass("pause")
 
-      sizeTimeSlider = ->
-        playerWidth = player.getWidth()
-        toolbar.width(playerWidth)
+        switchToPlay = ->
+          playButton
+            .removeClass("pause")
+            .addClass("play")
 
-        sliderWith = playerWidth
-        toolbar.children().not(".slider.time").each (index, item) ->
-          sliderWith -= $(item).outerWidth(true)
+        updateProgress = (event) =>
+          return if @updateProgressTimeout?
+          @updateProgressTimeout = setTimeout =>
+              # get the max position
+              maxWidth = timeSlider.children(".progress-container").width()
+              timeSlider.find(".progress").width( event.position * (maxWidth / event.duration) )
+              @updateProgressTimeout = null
 
-        timeSlider
-          .width( sliderWith )
-            # playerWidth \
-            #  - playButton.outerWidth(true) \
-            #  - volumeButton.outerWidth(true) \
-            #  - volumeSlider.outerWidth(true) \
-            #  # - separator.outerWidth(true) \
-            #  - normalScreenButton.outerWidth(true) \
-            #  - largerScreenButton.outerWidth(true) \
-            #  - fullScreenButton.outerWidth(true) \
-            #  - qualitySelector.outerWidth(true) \
-            #  - shareButton.outerWidth(true))
-        margin = parseInt( progressBar.css('margin-left'), 10) + parseInt( progressBar.css('margin-right') )
-        progressBar.width(timeSlider.width() - margin)
-        updateProgress({position:player.getPosition(), duration:player.getDuration()})
- 
-      element
-        .after(toolbar)
+              # save the current position.
+              element.data
+                position: event.position
 
-      sizeTimeSlider()
+            , 500
 
-      player
-        .onPlay( -> switchToPause() )
-        .onPause( -> switchToPlay() )
-        .onBuffer( -> switchToPause() )
-        .onIdle( -> switchToPlay() )
-        .onResize( -> sizeTimeSlider() )
-        .onTime( -> updateProgress(arguments...) )
-        .onMute( -> updateMute(arguments...) )
+        updateMute = (event) ->
+          if true is event.mute
+            volumeButton.addClass("mute")
+          else
+            volumeButton.removeClass("mute")
+
+        sizeTimeSlider = ->
+          sliderWidth = playerWidth = player.getWidth()
+          toolbar.width(playerWidth)
+
+          toolbar.children().not(".slider.time").each (index, item) ->
+            sliderWidth -= $(item).outerWidth(true)
+
+          timeSlider
+            .width( sliderWidth )
+
+          margin = parseInt( progressBar.css('margin-left'), 10) + parseInt( progressBar.css('margin-right') )
+          progressBar.width(timeSlider.width() - margin)
+          updateProgress
+            position:player.getPosition()
+            duration:player.getDuration()
+
+        element
+          .after(toolbar)
+
+        sizeTimeSlider()
+
+        player
+          .onPlay( -> switchToPause() )
+          .onPause( -> switchToPlay() )
+          .onBuffer( -> switchToPause() )
+          .onIdle( -> switchToPlay() )
+          .onResize( -> sizeTimeSlider() )
+          .onTime( -> updateProgress(arguments...) )
+          .onMute( -> updateMute(arguments...) )
+
+        $(window).unload ->
+          element.playertools( "log" )
+
+    log: ->
+
+      @each (index, item) ->
+        element = $( item )
+        position = element.data( "position" )
+        settings = element.data( "settings" )
+        console.log( "will log [position :: #{position}][WebTrends :: #{Webtrends?}]", settings.webtrends)
+
+        Webtrends?.multiTrack
+          args:
+            "DCS.dcssip": settings.webtrends.host
+            "DCS.dcsuri": settings.webtrends.path
+            "WT.clip_n": settings.webtrends.title
+            "WT.dl": "7"
+            "WT.clip_ev": "#{position}SEC"
+
+    close: ->
+
+      @playertools( "log" )
+
+  $.fn.playertools = ( method ) ->
+    # Method calling logic
+    return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 )) if methods[method]?
+    return methods.init.apply( this, arguments ) if "object" is typeof method or not method?
+    $.error( "Method #{method} does not exist on playertools" )
 
 )(jQuery)
