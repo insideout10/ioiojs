@@ -6,17 +6,23 @@ $ ->
   debug = window.debug ?= { log: -> }
 
   methods =
+
     init: (options) ->
 
       @each (index, item) ->
 
         container = $( item )
 
+        # remove any existing scrollbars.
+        container.remove( ".scrollbar.vertical" )
+
         #
         scrollHeight = container.get(0).scrollHeight
 
         # check if the area needs vertical scrolling
         return if scrollHeight <= container.height()
+
+        container.css( "overflow-y", "hidden" ) unless true is Modernizr?.cssscrollbar
 
         # add the scrollbar container.
         html = "<div class=\"scrollbar vertical\" style=\"position: absolute; top: 0px; right: 0px; height: #{container.get(0).scrollHeight}px;\">
@@ -33,7 +39,7 @@ $ ->
             axis: "y"
             containment: "parent"
             drag: (event, ui) ->
-              container.scrollTop ( container.get(0).scrollHeight - container.height() ) * ( ui.position.top / ( container.height() - scroller.height() ) )
+              container.scrollTop ( container.get(0).scrollHeight - container.height() ) * ( ui.position.top / ( container.get(0).scrollHeight - scroller.height() ) )
             start: ->
               container.data
                 dragging: true
@@ -43,7 +49,28 @@ $ ->
 
         container.scroll (event) ->
           return if container.data( "dragging" )
-          scroller.css( "top" , ( container.get(0).scrollHeight - scroller.height() ) * ( container.scrollTop() / ( container.get(0).scrollHeight - container.height() ) ) )
+          container.scrollify( "alignScroller" )
+
+        # resize the scrollbar if the container or the content are resized.
+        container
+          .resize -> container.scrollify( "resize" )
+          .children()
+            .resize -> container.scrollify( "resize" )
+
+    alignScroller: ->
+
+      @each (index, item) ->
+        container = $( item )
+        scroller = container.find( ".scrollbar.vertical .scroller" )
+        scroller.css( "top" , ( container.get(0).scrollHeight - scroller.height() ) * ( container.scrollTop() / ( container.get(0).scrollHeight - container.height() ) ) )
+
+    resize: ->
+
+      @each (index, item) ->
+        container = $( item )
+        container.children( ".scrollbar" )
+          .css( "height", container.get(0).scrollHeight )
+        container.scrollify( "alignScroller" )
 
   $.fn.scrollify = ( method ) ->
     # Method calling logic
