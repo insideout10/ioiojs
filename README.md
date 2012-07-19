@@ -578,6 +578,8 @@ The look of the scrollbars is 100% customizable using few lines of stylesheets (
 
 ### Scrollify
 
+![Scrollify banner](https://github.com/insideout10/ioiojs/raw/master/images/scrollify.png)
+
 The **Scrollify** use case is when you have a content that needs to be scrolled and you want to fully customize the look-n-feel of the scrollbars, including Firefox. Many solutions are already out there but they severe your existing stylesheets. Scrollify if 100% stylesheets friendly.
 
 
