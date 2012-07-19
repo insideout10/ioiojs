@@ -603,7 +603,7 @@ The **Scrollify** use case is when you have a content that needs to be scrolled 
 **Scrollify** is so easy to use that it does not require any custom setting:
 
 ```javascript
-  $('#container').scrollify();
+  $('.container').scrollify();
 ```
 
 #### Stylesheets
@@ -611,13 +611,18 @@ The **Scrollify** use case is when you have a content that needs to be scrolled 
 Scrollbars are controlled and customized via stylesheets:
 
 ```css
+::-webkit-scrollbar {
+  width:0;
+  height:0;
+}
+
 .content-container {
   overflow-x: none;
   overflow-y: scroll;
 }
 
 .content-container .content {
-  padding-right: 24px;
+  padding-right: 24px; /* make space for the scrollbar. */
 
   font-size: 14px;
   line-height: 20px;
