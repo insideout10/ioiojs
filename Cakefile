@@ -10,6 +10,7 @@ appFiles  = [
   'ioiojs/menufy'
   'ioiojs/playerToolbar'
   'ioiojs/scrollbars'
+  'ioiojs/scrollify'
   'ioiojs/slidingMenu'
 ]
 
