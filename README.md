@@ -5,6 +5,8 @@
 
 Welcome to **ioio.js**, a semantic UI framework developed in connection with [WordLift](http://wordlift.insideout.io).
 
+**New** in version 0.9.5, we added **Scrollify** to support easy to use fully customizable vertical scrollbars.
+
 The framework consists of several components:
 
 * **ActiveElement**: informs other components when the current active element has changed, useful to determine the active section.
@@ -13,7 +15,8 @@ The framework consists of several components:
 * **Mapify**: eases the implementation of 3rd geomap libraries (OpenLayers) by providing a simplified façade, and allows easy integration of GeoRSS feeds with custom icons.
 * **Menufy**: creates a dynamic menu from a simple list and automatically moves the current selected menu item on the top of the list. Can be combined with ActiveElement to automatically update itself when the user scrolls the browser.
 * **PlayerToolbar**: creates a 100% reusable HTML toolbar to manage a video player actions and events created via 3rd party libraries (LongTailVideo).
-* **Scrollbars**: creates non-obstrusive scrollbars that work just anywhere (Firefox included) and don't break your existing CSS.
+* **Scrollbars**: creates non-obstrusive horizontal scrollbars that work just anywhere (Firefox included) and don't break your existing CSS.
+* **Scrollify**: creates vertical scrollbars that work in any browser and **do not break your existing stylesheets**!
 * **SlidingMenu**: updates the 2nd level navigation menu according to the current section, in combination with ActiveElement, optionally using animations to show the menu.
 
 ### Announcements
@@ -570,6 +573,69 @@ The look of the scrollbars is 100% customizable using few lines of stylesheets (
     height:14px;
     
     background-image: url('img/scroller-regular.png');
+}
+```
+
+### Scrollify
+
+The **Scrollify** use case is when you have a content that needs to be scrolled and you want to fully customize the look-n-feel of the scrollbars, including Firefox. Many solutions are already out there but they severe your existing stylesheets. Scrollify if 100% stylesheets friendly.
+
+
+```
+   ____________ .content ____________ 
+  |                                  | 
+ ╔═════════════ #container ════════════╗
+ ║|                                  |▲║
+ ║|                                  ||║
+ ║|                                  ||║
+ ║|                                  ||║
+ ║|                                  ||║
+ ║|                                  |▓║
+ ║|__________________________________|▼║
+ ╚═════════════════════════════════════╝
+  :                                   :
+  :                                   :
+  .                                   .
+
+```
+
+
+**Scrollify** is so easy to use that it does not require any custom setting:
+
+```javascript
+  $('#container').scrollify();
+```
+
+#### Stylesheets
+
+Scrollbars are controlled and customized via stylesheets:
+
+```css
+.content-container {
+  overflow-x: none;
+  overflow-y: scroll;
+}
+
+.content-container .content {
+  padding-right: 24px;
+
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.content-container .scrollbar {
+  width: 20px;
+
+  background: url('a/link/to/the/scrollbar/guide/as/image.png') repeat-y center;
+}
+  
+.content-container .scrollbar .scroller {
+  width: 12px;
+  height: 50px;
+  
+  margin: 0 4px; /* to center the scroller in the scrollbar guide. */
+
+  background: url('a/link/to/the/scroller/image.png) center center no-repeat;
 }
 ```
 
