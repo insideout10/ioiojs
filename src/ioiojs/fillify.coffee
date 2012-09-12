@@ -157,7 +157,7 @@
 
             debug.log("forcing background width and height.")
 
-        element.trigger("fillify.fillify")
+      @trigger("fillify.fillify")
 
     getWindowHeight: ->
       # see http://bugs.jquery.com/ticket/6724
