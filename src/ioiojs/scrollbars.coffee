@@ -74,22 +74,6 @@
           # the scrollleft.
           (scrollerLeftRatio * containerMaxScrollLeft)
 
-        scrollerLeft = (container, scroller) ->
-
-          # the current scroll-left.
-          scrollLeft = container.scrollLeft()
-
-          # the maximum scroll-left.
-          scrollMaxLeft = container.maxScrollLeft()
-
-          # the scroll-left to scroll-max-left ratio.
-          scrollLeftRatio = (scrollLeft / scrollMaxLeft)
-
-          # the maximum left coordinate of the scroller.
-          scrollerMaxLeft = container.width() - scroller.width()
-
-          (scrollerMaxLeft * scrollLeftRatio)
-
         # set-up the draggable behaviour on the $scroller.
         $scroller.draggable
           axis : "x"
@@ -150,8 +134,24 @@
           return if true is $scroller.data( "dragging" )
 
           $scrollbar.css('left', $container.scrollLeft() )
-          $scroller.css('left', scrollerLeft($container, $scroller) )
+          $scroller.css('left', $container.scrollbars( "scrollerLeft", $scroller) )
 
+
+    scrollerLeft: (scroller) ->
+
+      # the current scroll-left.
+      scrollLeft = @scrollLeft()
+
+      # the maximum scroll-left.
+      scrollMaxLeft = @maxScrollLeft()
+
+      # the scroll-left to scroll-max-left ratio.
+      scrollLeftRatio = (scrollLeft / scrollMaxLeft)
+
+      # the maximum left coordinate of the scroller.
+      scrollerMaxLeft = @width() - scroller.width()
+
+      (scrollerMaxLeft * scrollLeftRatio)
 
   $.fn.scrollbars = ( method ) ->
     # Method calling logic
