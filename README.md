@@ -40,6 +40,14 @@ For the **debug version** in order to see the debug messages, the following libr
 
 * **ba-debug.js**: [https://raw.github.com/cowboy/javascript-debug/master/ba-debug.min.js](https://raw.github.com/cowboy/javascript-debug/master/ba-debug.min.js).
 
+### How to build
+
+You need *cake* to build and minify the library:
+
+```sh
+cake build minify
+```
+
 ### How to test
 
 **IOIO.JS** uses **JsTestDriver** for testing purposes. To run the automated test, clone the code then start the JsTestDriver by running from the project root folder:

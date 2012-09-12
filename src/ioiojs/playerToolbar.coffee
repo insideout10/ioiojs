@@ -256,7 +256,6 @@
         element = $( item )
         position = element.data( "position" )
         settings = element.data( "settings" )
-        console.log( "will log [position :: #{position}][WebTrends :: #{Webtrends?}]", settings.webtrends)
 
         Webtrends?.multiTrack
           args:
