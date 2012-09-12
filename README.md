@@ -44,8 +44,16 @@ For the **debug version** in order to see the debug messages, the following libr
 
 You need *cake* to build and minify the library:
 
+* build:
+
 ```sh
-cake build minify
+cake build
+```
+
+* minify:
+
+```sh
+cake minify
 ```
 
 ### How to test
