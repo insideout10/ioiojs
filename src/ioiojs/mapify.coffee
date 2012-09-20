@@ -164,6 +164,8 @@
               feature.attributes.id = @getElementsByTagNameNS(item, "*", settings.id)[0].textContent
               feature.attributes.thumbnail = @getElementsByTagNameNS(item, "*", settings.thumbnail.tag)[0].getAttribute(settings.thumbnail.attribute)
 
+              feature.attributes.summary = if 0 < @getElementsByTagNameNS(item, "*", "summary").length then @getElementsByTagNameNS(item, "*", "summary")[0].textContent
+
               # add the class name if we have configuration.
               if settings.className?.tag? and settings.className?.attribute?
                 feature.attributes.className = @getElementsByTagNameNS(item, "*", settings.className.tag)[0].getAttribute(settings.className.attribute)
@@ -224,6 +226,9 @@
           onSelect: (feature) =>
               position = feature.geometry
               # map.removePopup(popup) if popup?
+
+              debug.log( "Popup will interpolate with the following attributes:", feature )
+
               popup = new OpenLayers.Popup(
                 "popup",
                 new OpenLayers.LonLat( position.x, position.y),

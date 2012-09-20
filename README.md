@@ -5,7 +5,7 @@
 
 Welcome to **ioio.js**, a semantic UI framework developed in connection with [WordLift](http://wordlift.insideout.io).
 
-**New** in version 0.9.5, we added **Scrollify** to support easy to use fully customizable vertical scrollbars.
+**New** in version 0.9.6, we added **Scrollify** to support easy to use fully customizable vertical scrollbars.
 
 The framework consists of several components:
 
@@ -30,11 +30,11 @@ Requires jQuery 1.7.x and jQuery UI. Tested with jQuery 1.7.2 and jQuery UI 1.8.
 
 ### How to use
 
-Current version is **0.9.5**: to use it, get a copy of the library from here:
+Current version is **0.9.6**: to use it, get a copy of the library from here:
 
-* **minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.5.min.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.5.min.js),
-* **non-minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.5.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.5.js),
-* **non-minified debug** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.5.debug.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.5.debug.js).
+* **minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.6.min.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.6.min.js),
+* **non-minified** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.6.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.6.js),
+* **non-minified debug** version: [https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.6.debug.js](https://raw.github.com/insideout10/ioiojs/master/lib/ioio-0.9.6.debug.js).
 
 For the **debug version** in order to see the debug messages, the following library is required:
 
