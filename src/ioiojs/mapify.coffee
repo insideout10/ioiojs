@@ -240,6 +240,13 @@
               popup.closeDiv.className = feature.attributes.className
 
               map.addPopup( popup, true)
+              feature.popup = popup
+
+          onUnselect: (feature) =>
+            if feature.popup?
+              map.removePopup( feature.popup )
+              feature.popup.destroy()
+              feature.popup = null
 
         map.addControl(popupControl)
         popupControl.activate()
