@@ -202,12 +202,12 @@
     popupControl: (options) ->
 
       settings = $.extend
-        layer: null
+        layers: null
         size: {width: 230, height: 250}
         content: null
       ,options
 
-      $.error( "need to specify a layer." ) if not settings.layer?
+      # $.error( "need to specify a layer." ) if not settings.layer?
 
       debug.log("creating a popupControl.", settings);
 
@@ -222,8 +222,10 @@
         # @get('map').removeControl @get('popupControl'), false if @get('popupControl')?
 
         # control that will show a popup when clicking on a thumbnail.
-        popupControl = new OpenLayers.Control.SelectFeature settings.layer,
+        popupControl = new OpenLayers.Control.SelectFeature settings.layers,
+          clickout: true
           onSelect: (feature) =>
+              console.log "selected"
               position = feature.geometry
               # map.removePopup(popup) if popup?
 
